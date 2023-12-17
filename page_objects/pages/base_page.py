@@ -6,13 +6,12 @@ class BasePage:
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
-        self.wait = WebDriverWait(self.driver, timeout=5, poll_frequency=1)
+        self.wait = WebDriverWait(self.driver, timeout=10, poll_frequency=1)
 
     def open(self):
         self.driver.get(self.url)
-        self.remove_ad()
 
-    def element_is_visibility(self, locator):
+    def element_is_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator):
