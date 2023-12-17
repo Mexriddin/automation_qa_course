@@ -10,6 +10,7 @@ class BasePage:
 
     def open(self):
         self.driver.get(self.url)
+        self.remove_ad()
 
     def element_is_visibility(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
@@ -30,5 +31,8 @@ class BasePage:
         return self.wait.until(EC.element_to_be_clickable(locator))
 
     def go_to_element(self, element):
-        self.driver.executer_script(f"arguments[0].scrollIntoView();", element)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
+    def remove_ad(self):
+        self.driver.execute_script('document.getElementById("Ad.Plus-728x90").style.display="none"')
+        self.driver.execute_script('document.getElementById("adplus-anchor").style.display="none"')

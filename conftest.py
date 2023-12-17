@@ -6,7 +6,8 @@ from selenium import webdriver
 def driver():
     options = webdriver.ChromeOptions()
     # options.add_argument("--headless")
-    options.add_argument("window-size=1920x1080")
+    # options.add_argument("window-size=1920x1080")
     driver = webdriver.Chrome()
+    driver.maximize_window()
     yield driver
     driver.quit()
