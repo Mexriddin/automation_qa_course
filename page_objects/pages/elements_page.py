@@ -1,3 +1,4 @@
+import random
 from page_objects.pages.base_page import BasePage
 from page_objects.locators.elements_page_locators import *
 
@@ -77,3 +78,38 @@ class RadioButtonPage(BasePage):
 
     def get_output_result(self):
         return self.element_is_present(self.locators.OUTPUT_RESULT).text
+
+
+class WebTablePage(BasePage):
+    locators = WebTablePageLocators()
+
+    def add_new_person(self, person):
+        self.element_is_visible(self.locators.ADD_BUTTON).click()
+        self.element_is_visible(self.locators.FIRST_NAME).send_keys(person.first_name)
+        self.element_is_visible(self.locators.LAST_NAME).send_keys(person.last_name)
+        self.element_is_visible(self.locators.EMAIL).send_keys(person.email)
+        self.element_is_visible(self.locators.AGE).send_keys(person.age)
+        self.element_is_visible(self.locators.SALARY).send_keys(person.salary)
+        self.element_is_visible(self.locators.DEPARTMENT).send_keys(person.department)
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+
+    def check_added_new_person(self, person):
+        people_list = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
+        person_data = [person.first_name, person.last_name,
+                       str(person.age), person.email,
+                       str(person.salary), person.department]
+        data = []
+        for item in people_list:
+            data.append(item.text.splitlines())
+        for i in data:
+            if person_data is i:
+                continue
+            else:
+                AssertionError("Person is not added")
+
+    def search_some_person(self, key_word):
+        self.element_is_visible(self.locators.INPUT_SEARCH).send_keys(key_word)
+
+    def check_search_person(self, search_word):
+        person = self.element_is_present(self.locators.FULL_PEOPLE_LIST).text.splitlines()
+        assert search_word in person, "The person was not found in the table"

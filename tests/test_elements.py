@@ -1,3 +1,5 @@
+import time
+
 from generator.generator import generate_person
 from page_objects.pages.elements_page import *
 
@@ -34,3 +36,21 @@ class TestElements:
             radio_button_page.click_on_the_radio_button("no")
             output_no = radio_button_page.get_output_result()
             assert "No" == output_no, "'No' have not been selected'"
+
+    class TestWebTable:
+
+        def test_web_table_add_person(self, driver):
+            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page.open()
+            person = generate_person()
+            web_table_page.add_new_person(person)
+            web_table_page.check_added_new_person(person)
+
+        def test_web_table_search_person(self, driver):
+            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page.open()
+            person = generate_person()
+            web_table_page.add_new_person(person)
+            web_table_page.search_some_person(person.first_name)
+            web_table_page.check_search_person(person.last_name)
+

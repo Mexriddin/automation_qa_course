@@ -27,3 +27,19 @@ class RadioButtonsPageLocators:
     IMPRESSIVE_RADIO_BUTTON = ('xpath', "//label[contains(@class, 'custom-control-label') and @for='impressiveRadio']")
     NO_RADIO_BUTTON = ('xpath', "//label[contains(@class, 'custom-control-label') and @for='noRadio']")
     OUTPUT_RESULT = ('css selector', "span.text-success")
+
+
+class WebTablePageLocators:
+    # add person
+    ADD_BUTTON = ('id', 'addNewRecordButton')
+    FIRST_NAME = ('id', 'firstName')
+    LAST_NAME = ('id', 'lastName')
+    EMAIL = ('id', 'userEmail')
+    AGE = ('id', 'age')
+    SALARY = ('id', 'salary')
+    DEPARTMENT = ('id', 'department')
+    SUBMIT_BUTTON = ('id', 'submit')
+
+    # table
+    FULL_PEOPLE_LIST = ("css selector", ".rt-tr-group")
+    INPUT_SEARCH = ("css selector", "#searchBox")
