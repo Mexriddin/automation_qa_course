@@ -1,4 +1,8 @@
 import random
+import time
+
+from selenium.webdriver.support.select import Select
+
 from page_objects.pages.base_page import BasePage
 from page_objects.locators.elements_page_locators import *
 
@@ -108,8 +112,37 @@ class WebTablePage(BasePage):
                 AssertionError("Person is not added")
 
     def search_some_person(self, key_word):
+        self.element_is_visible(self.locators.INPUT_SEARCH).clear()
         self.element_is_visible(self.locators.INPUT_SEARCH).send_keys(key_word)
 
     def check_search_person(self, search_word):
         person = self.element_is_present(self.locators.FULL_PEOPLE_LIST).text.splitlines()
-        assert search_word in person, "The person was not found in the table"
+        assert str(search_word) in person, "The person was not found in the table"
+
+    def update_person_info(self, update_age):
+        self.element_is_visible(self.locators.EDIT_SPAN).click()
+        self.element_is_visible(self.locators.AGE).clear()
+        self.element_is_visible(self.locators.AGE).send_keys(update_age)
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+
+    def check_updated_person_info(self, update_age):
+        person = self.element_is_present(self.locators.FULL_PEOPLE_LIST).text.splitlines()
+        assert str(update_age) in person, "The person info has not been edited"
+
+    def delete_person(self):
+        self.element_is_visible(self.locators.DELETE_SPAN).click()
+
+    def check_deleted_person(self):
+        assert self.element_is_visible(self.locators.NO_ROWS_FOUND).text == "No rows found", \
+            "The deleted person should not have been found"
+
+    def change_rows_per_page(self, count):
+        count_row_select = self.element_is_visible(self.locators.SELECT_ROWS_PER_PAGE)
+        self.go_to_element(count_row_select)
+        select_count_rows = Select(count_row_select)
+        select_count_rows.select_by_value(str(count))
+
+    def check_rows_per_page(self, count):
+        rows_list = self.elements_are_visible(self.locators.FULL_PEOPLE_LIST)
+        assert len(rows_list) == count, f"There should be {count} rows in the page"
+

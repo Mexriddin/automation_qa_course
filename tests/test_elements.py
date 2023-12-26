@@ -54,3 +54,30 @@ class TestElements:
             web_table_page.search_some_person(person.first_name)
             web_table_page.check_search_person(person.last_name)
 
+        def test_web_table_update_person_info(self, driver):
+            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page.open()
+            person = generate_person()
+            web_table_page.add_new_person(person)
+            person.age = random.randint(18, 60)
+            web_table_page.search_some_person(person.first_name)
+            web_table_page.update_person_info(person.age)
+            web_table_page.check_updated_person_info(person.age)
+
+        def test_web_table_delete_person(self, driver):
+            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page.open()
+            person = generate_person()
+            web_table_page.add_new_person(person)
+            web_table_page.search_some_person(person.first_name)
+            web_table_page.delete_person()
+            web_table_page.check_deleted_person()
+
+        def test_web_table_change_count_rows(self, driver):
+            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page.open()
+            counts = [5, 10, 20, 25, 50, 100]
+            count = random.choice(counts)
+            web_table_page.change_rows_per_page(count)
+            web_table_page.check_rows_per_page(count)
+

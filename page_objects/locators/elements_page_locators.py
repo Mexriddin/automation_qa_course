@@ -43,3 +43,7 @@ class WebTablePageLocators:
     # table
     FULL_PEOPLE_LIST = ("css selector", ".rt-tr-group")
     INPUT_SEARCH = ("css selector", "#searchBox")
+    EDIT_SPAN = ("css selector", "span[title='Edit']")
+    DELETE_SPAN = ("css selector", "span[title='Delete']")
+    NO_ROWS_FOUND = ("css selector", "div.rt-noData")
+    SELECT_ROWS_PER_PAGE = ("css selector", "select[aria-label='rows per page']")
