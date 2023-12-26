@@ -1,5 +1,6 @@
 import random
 import time
+import requests
 
 from selenium.webdriver.support.select import Select
 
@@ -163,8 +164,25 @@ class ButtonsPage(BasePage):
             assert self.element_is_visible(self.locators.DOUBLE_CLICK_MESSAGE).text == "You have done a double click", \
                 "The double click button was not clicked"
         if click_type == "right":
-            assert self.element_is_visible(self.locators.RIGHT_CLICK_MESSAGE).text == "You have done a right click",\
+            assert self.element_is_visible(self.locators.RIGHT_CLICK_MESSAGE).text == "You have done a right click", \
                 "The right click button was not clicked"
         if click_type == "click":
             assert self.element_is_visible(self.locators.SIMPLE_CLICK_MESSAGE).text == "You have done a dynamic click", \
                 "The dynamic click button was not clicked"
+
+
+class LinksPage(BasePage):
+    locators = LinksPageLocators()
+
+    def check_new_tab_simple_link(self):
+        simple_link = self.element_is_visible(self.locators.SIMPLE_LINK)
+        link_href = simple_link.get_attribute("href")
+        simple_link.click()
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        assert requests.get(link_href).status_code == 200
+        assert self.driver.current_url == link_href, "The link is broken or url is incorrect"
+
+    def check_broken_link(self):
+        simple_link = self.element_is_visible(self.locators.BAD_REQUEST)
+        link_href = simple_link.get_attribute("href")
+        assert requests.get(link_href).status_code == 400, "The link works or the status code in son 400"

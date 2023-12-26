@@ -88,16 +88,13 @@ class TestElements:
             buttons_page.click_on_different_button(click_type)
             buttons_page.check_clicked_button(click_type)
 
+    class TestLinks:
+        def test_check_link(self, driver):
+            links_page = LinksPage(driver, "https://demoqa.com/links")
+            links_page.open()
+            links_page.check_new_tab_simple_link()
 
-
-
-
-
-
-
-
-
-
-
-
-
+        def test_broken_link(self, driver):
+            links_page = LinksPage(driver, "https://demoqa.com/links")
+            links_page.open()
+            links_page.check_broken_link()

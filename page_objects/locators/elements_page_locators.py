@@ -58,3 +58,8 @@ class ButtonsPageLocators:
     DOUBLE_CLICK_MESSAGE = ("css selector", "p#doubleClickMessage")
     RIGHT_CLICK_MESSAGE = ("css selector", "p#rightClickMessage")
     SIMPLE_CLICK_MESSAGE = ("css selector", "p#dynamicClickMessage")
+
+
+class LinksPageLocators:
+    SIMPLE_LINK = ("css selector", "a#simpleLink")
+    BAD_REQUEST = ("css selector", "a#bad-request")
