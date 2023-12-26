@@ -1,6 +1,6 @@
 import time
 
-from generator.generator import generate_person
+from generator.generator import generate_person, generate_count_rows
 from page_objects.pages.elements_page import *
 
 
@@ -76,8 +76,7 @@ class TestElements:
         def test_web_table_change_count_rows(self, driver):
             web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
-            counts = [5, 10, 20, 25, 50, 100]
-            count = random.choice(counts)
+            count = generate_person()
             web_table_page.change_rows_per_page(count)
             web_table_page.check_rows_per_page(count)
 

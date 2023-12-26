@@ -18,3 +18,9 @@ def generate_person():
         current_address=faker.address(),
         permanent_address=faker.address()
     )
+
+
+def generate_count_rows():
+    counts = [5, 10, 20, 25, 50, 100]
+    count = random.choice(counts)
+    return count
