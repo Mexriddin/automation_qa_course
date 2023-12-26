@@ -20,7 +20,12 @@ def generate_person():
     )
 
 
-def generate_count_rows():
+def random_count_rows():
     counts = [5, 10, 20, 25, 50, 100]
     count = random.choice(counts)
     return count
+
+def random_click_type():
+    click_types = ['double', 'right', 'click']
+    click_type = random.choice(click_types)
+    return click_type

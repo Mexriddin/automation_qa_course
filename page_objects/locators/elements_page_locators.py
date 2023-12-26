@@ -29,7 +29,7 @@ class RadioButtonsPageLocators:
     OUTPUT_RESULT = ('css selector', "span.text-success")
 
 
-class WebTablePageLocators:
+class WebTablesPageLocators:
     # add person
     ADD_BUTTON = ('id', 'addNewRecordButton')
     FIRST_NAME = ('id', 'firstName')
@@ -47,3 +47,14 @@ class WebTablePageLocators:
     DELETE_SPAN = ("css selector", "span[title='Delete']")
     NO_ROWS_FOUND = ("css selector", "div.rt-noData")
     SELECT_ROWS_PER_PAGE = ("css selector", "select[aria-label='rows per page']")
+
+
+class ButtonsPageLocators:
+    DOUBLE_CLICK_BUTTON = ("css selector", "button#doubleClickBtn")
+    RIGHT_CLICK_BUTTON = ("css selector", "button#rightClickBtn")
+    SIMPLE_CLICK_BUTTON = ("xpath", "//button[text()='Click Me']")
+
+    # result
+    DOUBLE_CLICK_MESSAGE = ("css selector", "p#doubleClickMessage")
+    RIGHT_CLICK_MESSAGE = ("css selector", "p#rightClickMessage")
+    SIMPLE_CLICK_MESSAGE = ("css selector", "p#dynamicClickMessage")

@@ -84,8 +84,8 @@ class RadioButtonPage(BasePage):
         return self.element_is_present(self.locators.OUTPUT_RESULT).text
 
 
-class WebTablePage(BasePage):
-    locators = WebTablePageLocators()
+class WebTablesPage(BasePage):
+    locators = WebTablesPageLocators()
 
     def add_new_person(self, person):
         self.element_is_visible(self.locators.ADD_BUTTON).click()
@@ -146,3 +146,25 @@ class WebTablePage(BasePage):
         rows_list = self.elements_are_visible(self.locators.FULL_PEOPLE_LIST)
         assert len(rows_list) == count, f"There should be {count} rows in the page"
 
+
+class ButtonsPage(BasePage):
+    locators = ButtonsPageLocators()
+
+    def click_on_different_button(self, click_type):
+        if click_type == "double":
+            self.action_double_click(self.element_is_visible(self.locators.DOUBLE_CLICK_BUTTON))
+        if click_type == "right":
+            self.action_right_click(self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON))
+        if click_type == "click":
+            self.element_is_visible(self.locators.SIMPLE_CLICK_BUTTON).click()
+
+    def check_clicked_button(self, click_type):
+        if click_type == "double":
+            assert self.element_is_visible(self.locators.DOUBLE_CLICK_MESSAGE).text == "You have done a double click", \
+                "The double click button was not clicked"
+        if click_type == "right":
+            assert self.element_is_visible(self.locators.RIGHT_CLICK_MESSAGE).text == "You have done a right click",\
+                "The right click button was not clicked"
+        if click_type == "click":
+            assert self.element_is_visible(self.locators.SIMPLE_CLICK_MESSAGE).text == "You have done a dynamic click", \
+                "The dynamic click button was not clicked"

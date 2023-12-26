@@ -1,6 +1,6 @@
 import time
 
-from generator.generator import generate_person, generate_count_rows
+from generator.generator import generate_person, random_count_rows, random_click_type
 from page_objects.pages.elements_page import *
 
 
@@ -37,17 +37,17 @@ class TestElements:
             output_no = radio_button_page.get_output_result()
             assert "No" == output_no, "'No' have not been selected'"
 
-    class TestWebTable:
+    class TestWebTables:
 
         def test_web_table_add_person(self, driver):
-            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page = WebTablesPage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
             person = generate_person()
             web_table_page.add_new_person(person)
             web_table_page.check_added_new_person(person)
 
         def test_web_table_search_person(self, driver):
-            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page = WebTablesPage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
             person = generate_person()
             web_table_page.add_new_person(person)
@@ -55,7 +55,7 @@ class TestElements:
             web_table_page.check_search_person(person.last_name)
 
         def test_web_table_update_person_info(self, driver):
-            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page = WebTablesPage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
             person = generate_person()
             web_table_page.add_new_person(person)
@@ -65,7 +65,7 @@ class TestElements:
             web_table_page.check_updated_person_info(person.age)
 
         def test_web_table_delete_person(self, driver):
-            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page = WebTablesPage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
             person = generate_person()
             web_table_page.add_new_person(person)
@@ -74,9 +74,30 @@ class TestElements:
             web_table_page.check_deleted_person()
 
         def test_web_table_change_count_rows(self, driver):
-            web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            web_table_page = WebTablesPage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
-            count = generate_person()
+            count = random_count_rows()
             web_table_page.change_rows_per_page(count)
             web_table_page.check_rows_per_page(count)
+
+    class TestButton:
+        def test_different_click_on_the_buttons(self, driver):
+            buttons_page = ButtonsPage(driver, "https://demoqa.com/buttons")
+            buttons_page.open()
+            click_type = random_click_type()
+            buttons_page.click_on_different_button(click_type)
+            buttons_page.check_clicked_button(click_type)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
