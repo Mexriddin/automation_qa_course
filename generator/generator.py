@@ -1,3 +1,7 @@
+import datetime
+import os
+import pathlib
+
 from data.data import Person
 from faker import Faker
 import random
@@ -25,7 +29,15 @@ def random_count_rows():
     count = random.choice(counts)
     return count
 
+
 def random_click_type():
     click_types = ['double', 'right', 'click']
     click_type = random.choice(click_types)
     return click_type
+
+
+def generate_file():
+    path = f"../artifacts/upload_files/file_test_{random.randint(1, 10000)}.txt"
+    with open(path, 'w+') as f:
+        f.write(f"Hello, World {random.randint(1, 1000)}")
+    return os.path.abspath(path)

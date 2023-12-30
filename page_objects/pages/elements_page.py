@@ -1,3 +1,4 @@
+import os
 import random
 import time
 import requests
@@ -186,3 +187,32 @@ class LinksPage(BasePage):
         simple_link = self.element_is_visible(self.locators.BAD_REQUEST)
         link_href = simple_link.get_attribute("href")
         assert requests.get(link_href).status_code == 400, "The link works or the status code in son 400"
+
+
+class UploadAndDownloadPage(BasePage):
+    locators = UploadAndDownloadPageLocators()
+
+    def upload_file(self, file):
+        self.element_is_visible(self.locators.UPLOAD_BUTTON).send_keys(file)
+
+    def download_file(self):
+        self.element_is_visible(self.locators.DOWNLOAD_BUTTON).click()
+        time.sleep(.5)
+        return self.element_is_visible(self.locators.DOWNLOAD_BUTTON).get_attribute('download')
+
+    def check_upload_file(self, file_name):
+        file = self.element_is_visible(self.locators.UPLOADED_FILE).text.split("\\")[-1]
+        assert file == file_name.split("\\")[-1], f"The file: {file_name} is not been uploaded"
+
+    def check_download_file(self, downloaded_file):
+        download_files = os.listdir(f"{os.path.dirname(os.getcwd())}\\artifacts\\download_files")
+        assert downloaded_file in download_files, f"The file: {downloaded_file} has not been downloaded"
+
+
+
+
+
+
+
+
+

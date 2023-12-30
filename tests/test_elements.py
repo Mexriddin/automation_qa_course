@@ -1,6 +1,6 @@
 import time
 
-from generator.generator import generate_person, random_count_rows, random_click_type
+from generator.generator import *
 from page_objects.pages.elements_page import *
 
 
@@ -98,3 +98,17 @@ class TestElements:
             links_page = LinksPage(driver, "https://demoqa.com/links")
             links_page.open()
             links_page.check_broken_link()
+
+    class TestUploadAndDownload:
+        def test_upload_file(self, driver):
+            upload_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
+            upload_download_page.open()
+            file_path = generate_file()
+            upload_download_page.upload_file(file_path)
+            upload_download_page.check_upload_file(file_path)
+
+        def test_download_file(self, driver):
+            upload_download_page = UploadAndDownloadPage(driver, "https://demoqa.com/upload-download")
+            upload_download_page.open()
+            downloaded_file = upload_download_page.download_file()
+            upload_download_page.check_download_file(downloaded_file)
