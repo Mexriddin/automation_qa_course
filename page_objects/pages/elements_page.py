@@ -2,6 +2,8 @@ import os
 import random
 import time
 import requests
+from selenium.common import TimeoutException
+from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.select import Select
 
@@ -202,17 +204,35 @@ class UploadAndDownloadPage(BasePage):
 
     def check_upload_file(self, file_name):
         file = self.element_is_visible(self.locators.UPLOADED_FILE).text.split("\\")[-1]
-        assert file == file_name.split("\\")[-1], f"The file: {file_name} is not been uploaded"
+        assert file == file_name.split("\\")[-1], f"The file: {file_name} has not been uploaded"
 
     def check_download_file(self, downloaded_file):
         download_files = os.listdir(f"{os.path.dirname(os.getcwd())}\\artifacts\\download_files")
         assert downloaded_file in download_files, f"The file: {downloaded_file} has not been downloaded"
 
 
+class DynamicPropertiesPage(BasePage):
+    locators = DynamicPropertiesLocators()
 
+    def check_changed_color(self):
+        before_color_button = self.element_is_present(self.locators.COLOR_CHANGE_BUTTON).value_of_css_property('color')
+        self.element_attribute_is_has_value(self.locators.COLOR_CHANGE_BUTTON,
+                                            'class', 'text-danger')
+        after_color_button = self.element_is_present(self.locators.COLOR_CHANGE_BUTTON).value_of_css_property('color')
+        assert before_color_button is not after_color_button, f"The button color has not been changed"
 
+    def check_appear_button(self):
+        state = True
+        try:
+            self.element_is_visible(self.locators.VISIBLE_AFTER_BUTTON)
+        except TimeoutException:
+            state = False
+        assert state, "The button has not been appeared after 5 second"
 
-
-
-
-
+    def check_enabled_button(self):
+        state = True
+        try:
+            self.element_is_clickable(self.locators.ENABLE_BUTTON)
+        except TimeoutException:
+            state = False
+        assert state, "The button has not been enabled after 5 second"

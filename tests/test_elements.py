@@ -112,3 +112,19 @@ class TestElements:
             upload_download_page.open()
             downloaded_file = upload_download_page.download_file()
             upload_download_page.check_download_file(downloaded_file)
+
+    class TestDynamicProperties:
+        def test_change_button_properties(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+            dynamic_properties_page.open()
+            dynamic_properties_page.check_changed_color()
+
+        def test_appear_button(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+            dynamic_properties_page.open()
+            dynamic_properties_page.check_appear_button()
+
+        def test_enabled_button(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+            dynamic_properties_page.open()
+            dynamic_properties_page.check_enabled_button()

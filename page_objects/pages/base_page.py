@@ -30,6 +30,9 @@ class BasePage:
     def element_is_clickable(self, locator):
         return self.wait.until(EC.element_to_be_clickable(locator))
 
+    def element_attribute_is_has_value(self, locator, atr, value):
+        return self.wait.until(EC.text_to_be_present_in_element_attribute(locator, atr, value))
+
     def action_double_click(self, element):
         action = ActionChains(self.driver)
         action.double_click(element).perform()
