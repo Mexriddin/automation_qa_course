@@ -12,3 +12,9 @@ class AlertsPageLocators:
 
     CONFIRM_RESULT = ('css selector', 'span#confirmResult')
     PROMPT_RESULT = ('css selector', 'span#promptResult')
+
+
+class FramesPageLocators:
+    FIRST_FRAME = ('css selector', 'iframe#frame1')
+    SECOND_FRAME = ('css selector', 'iframe#frame2')
+    HEADING_IN_IFRAME = ('css selector', 'h1#sampleHeading')

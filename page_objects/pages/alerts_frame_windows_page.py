@@ -48,3 +48,22 @@ class AlertsPage(BasePage):
         alert.accept()
         result = self.element_is_visible(self.locators.PROMPT_RESULT).text
         assert text in result, f"You entered {text}"
+
+
+class FramesPage(BasePage):
+    locators = FramesPageLocators()
+
+    def check_frame(self, frame_number):
+        if frame_number == 'frame1':
+            frame = self.element_is_present(self.locators.FIRST_FRAME)
+            assert frame.size['width'] == 500
+            assert frame.size['height'] == 350
+            self.driver.switch_to.frame(frame)
+        if frame_number == 'frame2':
+            frame = self.element_is_present(self.locators.SECOND_FRAME)
+            assert frame.size['width'] == 100
+            assert frame.size['height'] == 100
+            self.driver.switch_to.frame(frame)
+        heading_in_iframe = self.element_is_present(self.locators.HEADING_IN_IFRAME).text
+        self.driver.switch_to.default_content()
+        assert heading_in_iframe == "This is a sample page", "The frame does not exist"

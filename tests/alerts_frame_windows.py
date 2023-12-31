@@ -33,3 +33,10 @@ class TestAlertsFrameWindows:
             alerts_page = AlertsPage(driver, "https://demoqa.com/alerts")
             alerts_page.open()
             alerts_page.check_prompt_alert()
+
+    class TestFrames:
+        def test_frames(self, driver):
+            frames_page = FramesPage(driver, "https://demoqa.com/frames")
+            frames_page.open()
+            frames_page.check_frame('frame1')
+            frames_page.check_frame('frame2')
