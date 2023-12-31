@@ -18,3 +18,10 @@ class FramesPageLocators:
     FIRST_FRAME = ('css selector', 'iframe#frame1')
     SECOND_FRAME = ('css selector', 'iframe#frame2')
     HEADING_IN_IFRAME = ('css selector', 'h1#sampleHeading')
+
+
+class NestedFramesPageLocators:
+    PARENT_FRAME = ('css selector', 'iframe#frame1')
+    CHILD_FRAME = ('tag name', 'iframe')
+    PARENT_FRAME_TEXT = ('tag name', 'body')
+    CHILD_FRAME_TEXT = ('tag name', 'p')

@@ -67,3 +67,17 @@ class FramesPage(BasePage):
         heading_in_iframe = self.element_is_present(self.locators.HEADING_IN_IFRAME).text
         self.driver.switch_to.default_content()
         assert heading_in_iframe == "This is a sample page", "The frame does not exist"
+
+
+class NestedFramesPage(BasePage):
+    locators = NestedFramesPageLocators()
+
+    def check_nested_frame(self):
+        parent_frame = self.element_is_present(self.locators.PARENT_FRAME)
+        self.driver.switch_to.frame(parent_frame)
+        assert self.element_is_present(self.locators.PARENT_FRAME_TEXT).text == 'Parent frame', \
+            'The parent frame does not exist'
+        child_frame = self.element_is_present(self.locators.CHILD_FRAME)
+        self.driver.switch_to.frame(child_frame)
+        assert self.element_is_present(self.locators.CHILD_FRAME_TEXT).text == 'Child Iframe', \
+            "The child frame does not exist"

@@ -40,3 +40,9 @@ class TestAlertsFrameWindows:
             frames_page.open()
             frames_page.check_frame('frame1')
             frames_page.check_frame('frame2')
+
+    class TestNestedFrames:
+        def test_nested_frames(self, driver):
+            nested_frames_page = NestedFramesPage(driver, "https://demoqa.com/nestedframes")
+            nested_frames_page.open()
+            nested_frames_page.check_nested_frame()
