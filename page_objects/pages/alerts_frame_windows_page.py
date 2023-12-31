@@ -81,3 +81,22 @@ class NestedFramesPage(BasePage):
         self.driver.switch_to.frame(child_frame)
         assert self.element_is_present(self.locators.CHILD_FRAME_TEXT).text == 'Child Iframe', \
             "The child frame does not exist"
+
+
+class ModalDialogsPage(BasePage):
+    locators = ModalDialogsPageLocators()
+
+    def check_modal_dialogs(self):
+        self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
+        small_title = self.element_is_visible(self.locators.TITLE_SMALL_MODAL).text
+        small_body = self.element_is_visible(self.locators.BODY_SMALL_MODAL).text
+        self.element_is_visible(self.locators.CLOSE_SMALL_MODAL).click()
+
+        self.element_is_visible(self.locators.LARGE_MODAL_BUTTON).click()
+        large_title = self.element_is_visible(self.locators.TITLE_LARGE_MODAL).text
+        large_body = self.element_is_visible(self.locators.BODY_LARGE_MODAL).text
+        self.element_is_visible(self.locators.CLOSE_LARGE_MODAL).click()
+
+        assert len(small_body) < len(large_body), 'Text from small dialog is less than text from large dialog'
+        assert small_title == 'Small Modal', 'The header is not "Small Modal"!'
+        assert large_title == 'Large Modal', 'The header is not "Large Modal"!'

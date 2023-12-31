@@ -46,3 +46,9 @@ class TestAlertsFrameWindows:
             nested_frames_page = NestedFramesPage(driver, "https://demoqa.com/nestedframes")
             nested_frames_page.open()
             nested_frames_page.check_nested_frame()
+
+    class TestModalDialogs:
+        def test_modal_dialogs(self, driver):
+            modal_dialogs_page = ModalDialogsPage(driver, "https://demoqa.com/modal-dialogs")
+            modal_dialogs_page.open()
+            modal_dialogs_page.check_modal_dialogs()
