@@ -15,6 +15,9 @@ class BasePage:
     def element_is_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
 
+    def alert_is_visible(self):
+        return self.wait.until(EC.alert_is_present())
+
     def elements_are_visible(self, locator):
         return self.wait.until(EC.visibility_of_any_elements_located(locator))
 
