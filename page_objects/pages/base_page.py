@@ -33,6 +33,12 @@ class BasePage:
     def element_attribute_is_has_value(self, locator, atr, value):
         return self.wait.until(EC.text_to_be_present_in_element_attribute(locator, atr, value))
 
+    def element_has_text(self, locator, text):
+        elements = self.elements_are_visible(locator)
+        for i in elements:
+            if i.text == text:
+                return i
+
     def action_double_click(self, element):
         action = ActionChains(self.driver)
         action.double_click(element).perform()
@@ -47,3 +53,7 @@ class BasePage:
     def remove_ad(self):
         self.driver.execute_script('document.getElementById("Ad.Plus-728x90").style.display="none"')
         self.driver.execute_script('document.getElementById("adplus-anchor").style.display="none"')
+
+    def remove_footer(self):
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        self.driver.execute_script("document.getElementById('close-fixedban').remove();")

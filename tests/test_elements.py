@@ -1,5 +1,3 @@
-import time
-
 from generator.generator import *
 from page_objects.pages.elements_page import *
 

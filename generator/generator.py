@@ -2,7 +2,7 @@ import datetime
 import os
 import pathlib
 
-from data.data import Person
+from data.data import *
 from faker import Faker
 import random
 
@@ -24,6 +24,20 @@ def generate_person():
     )
 
 
+def generate_student():
+    return Student(
+        first_name=faker.first_name(),
+        last_name=faker.last_name(),
+        email=faker.email(),
+        gender=random.choice(["Male", "Female", "Other"]),
+        date_of_birth=faker.date_of_birth().strftime("%d %b %Y"),
+        subjects=[random.choice(["Math", "Arts", "Physics", "Chemistry", "English", "Biology"]) for _ in range(2)],
+        hobby=random.choice(["Sports", "Reading", "Music"]),
+        current_address=faker.address(),
+        mobile="".join([str(random.randint(0, 9)) for _ in range(10)])
+    )
+
+
 def random_count_rows():
     counts = [5, 10, 20, 25, 50, 100]
     count = random.choice(counts)
@@ -41,3 +55,8 @@ def generate_file():
     with open(path, 'w+') as f:
         f.write(f"Hello, World {random.randint(1, 1000)}")
     return os.path.abspath(path)
+
+
+def generate_jpeg():
+    picture = "../data/sampleFile.jpeg"
+    return os.path.abspath(picture)

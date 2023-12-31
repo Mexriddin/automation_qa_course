@@ -14,3 +14,10 @@ class Person:
     permanent_address: str = None
 
 
+@dataclass
+class Student(Person):
+    mobile: str = None
+    date_of_birth: str = None
+    gender: str = None
+    subjects: list = None
+    hobby: str = None
