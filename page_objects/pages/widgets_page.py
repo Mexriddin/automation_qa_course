@@ -1,0 +1,36 @@
+from page_objects.pages.base_page import BasePage
+from selenium.common.exceptions import TimeoutException
+from page_objects.locators.widgets_page_locators import *
+
+
+class AccordianPage(BasePage):
+    locators = AccordianPageLocators()
+    accordian = {
+        'first': {
+            'title': locators.SECTION_FIRST,
+            'content': locators.SECTION_CONTENT_FIRST,
+            'checker': locators.SECTION_FIRST_CHECKER
+        },
+        'second': {
+            'title': locators.SECTION_SECOND,
+            'content': locators.SECTION_CONTENT_SECOND,
+            'checker': locators.SECTION_SECOND_CHECKER
+        },
+        'third': {
+            'title': locators.SECTION_THIRD,
+            'content': locators.SECTION_CONTENT_THIRD,
+            'checker': locators.SECTION_THIRD_CHECKER
+        }
+    }
+
+    def open_accordian_content(self, accordian_number):
+        self.scroll()
+        section_title = self.element_is_visible(self.accordian[accordian_number]['title'])
+        section_title.click()
+
+    def check_accordian_content(self, accordian_number):
+        try:
+            assert self.element_is_visible(self.accordian[accordian_number]['checker'])
+            assert self.element_is_visible(self.accordian[accordian_number]['content']).text is not None
+        except TimeoutException:
+            self.open_accordian_content(accordian_number)

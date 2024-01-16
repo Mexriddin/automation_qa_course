@@ -50,6 +50,9 @@ class BasePage:
         action = ActionChains(self.driver)
         action.context_click(element).perform()
 
+    def scroll(self):
+        self.driver.execute_script("window.scrollBy(0, 350);")
+
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
