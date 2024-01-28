@@ -60,3 +60,10 @@ def generate_file():
 def generate_jpeg():
     picture = "../data/sampleFile.jpeg"
     return os.path.abspath(picture)
+
+
+def generate_colors(count):
+    all__colors = ["Red", "Green", "Blue", "Yellow", "Aqua", "White", "Purple", "Violet", "Magenta", "Indigo", "Black"]
+    colors = [random.choice(all__colors) for _ in range(count)]
+    print(colors)
+    return Colors(colors_list=colors)

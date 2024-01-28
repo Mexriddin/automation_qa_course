@@ -8,3 +8,9 @@ class AccordianPageLocators:
     SECTION_THIRD = ('id', "section3Heading")
     SECTION_CONTENT_THIRD = ('xpath', '//*[@id="section3Content"]/p[1]')
     SECTION_THIRD_CHECKER = ('xpath', '//*[@id="section3Heading"]/following-sibling::*[@class="collapse show"]')
+
+
+class AutoCompletePageLocators:
+    MULTI_INPUT = ('css selector', 'input[id=autoCompleteMultipleInput]')
+    MULTI_VALUE = ('css selector', '.auto-complete__multi-value__label')
+    DELETE_BTN_MULTI_VALUE = ('css selector', '.auto-complete__multi-value__remove')

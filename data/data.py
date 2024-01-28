@@ -21,3 +21,8 @@ class Student(Person):
     gender: str = None
     subjects: list = None
     hobby: str = None
+
+
+@dataclass
+class Colors:
+    colors_list: list = None
