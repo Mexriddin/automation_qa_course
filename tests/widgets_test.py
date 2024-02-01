@@ -1,12 +1,18 @@
 import random
+
+import allure
+
 from generator.generator import generate_colors
 import time
 
 from page_objects.pages.widgets_page import *
 
 
+@allure.epic("Elements")
 class TestWidgets:
+    @allure.feature("Accordian")
     class TestAccordian:
+        @allure.title("Check accordian")
         def test_accordian(self, driver):
             accordian_page = AccordianPage(driver, "https://demoqa.com/accordian")
             accordian_page.open()
@@ -14,7 +20,9 @@ class TestWidgets:
             accordian_page.open_accordian_content(section)
             accordian_page.check_accordian_content(section)
 
+    @allure.feature("AutoComplete")
     class TestAutoComplete:
+        @allure.title("Check autocomplete")
         def test_auto_complete(self, driver):
             autocomplete_page = AutoCompletePage(driver, "https://demoqa.com/auto-complete")
             autocomplete_page.open()

@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver import Keys
 
 from page_objects.pages.base_page import BasePage
@@ -28,27 +29,31 @@ class AccordianPage(BasePage):
     }
 
     def open_accordian_content(self, accordian_number):
-        self.scroll()
-        section_title = self.element_is_visible(self.accordian[accordian_number]['title'])
-        section_title.click()
+        with allure.step(f'Open accordian: {accordian_number}'):
+            self.scroll()
+            section_title = self.element_is_visible(self.accordian[accordian_number]['title'])
+            section_title.click()
 
     def check_accordian_content(self, accordian_number):
-        try:
-            assert self.element_is_visible(self.accordian[accordian_number]['checker'])
-            assert self.element_is_visible(self.accordian[accordian_number]['content']).text is not None
-        except TimeoutException:
-            self.open_accordian_content(accordian_number)
+        with allure.step(f'Check accordian: {accordian_number}'):
+            try:
+                assert self.element_is_visible(self.accordian[accordian_number]['checker'])
+                assert self.element_is_visible(self.accordian[accordian_number]['content']).text is not None
+            except TimeoutException:
+                self.open_accordian_content(accordian_number)
 
 
 class AutoCompletePage(BasePage):
     locators = AutoCompletePageLocators()
 
     def fill_multi_input(self, colors):
-        input_multi = self.element_is_clickable(self.locators.MULTI_INPUT)
-        for color in colors.colors_list:
-            input_multi.send_keys(color)
-            input_multi.send_keys(Keys.ENTER)
+        with allure.step(f'Filling with: {colors}'):
+            input_multi = self.element_is_clickable(self.locators.MULTI_INPUT)
+            for color in colors.colors_list:
+                input_multi.send_keys(color)
+                input_multi.send_keys(Keys.ENTER)
 
     def check_value_multi_input(self, count):
-        value_multi = self.elements_are_visible(self.locators.MULTI_VALUE)
-        assert len(value_multi) == count
+        with allure.step(f'Check value multi input: {count}'):
+            value_multi = self.elements_are_visible(self.locators.MULTI_VALUE)
+            assert len(value_multi) == count

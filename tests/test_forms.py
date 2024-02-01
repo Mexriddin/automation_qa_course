@@ -1,8 +1,11 @@
+import allure
 from generator.generator import *
 from page_objects.pages.form_page import *
 
 
+@allure.epic("Forms")
 class TestForms:
+    @allure.title("Student registration")
     def test_student_registration_form(self, driver):
         practice_form_page = PracticeFormPage(driver, "https://demoqa.com/automation-practice-form")
         practice_form_page.open()
