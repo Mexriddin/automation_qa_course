@@ -51,10 +51,11 @@ def random_click_type():
 
 
 def generate_file():
-    path = f"../artifacts/upload_files/file_test_{random.randint(1, 10000)}.txt"
-    with open(path, 'w+') as f:
+    file = f"file_test_{random.randint(1, 10000)}.txt"
+    path_file = f"{os.getcwd()}\\artifacts\\upload_files\\{file}"
+    with open(path_file, 'w+') as f:
         f.write(f"Hello, World {random.randint(1, 1000)}")
-    return os.path.abspath(path)
+    return path_file
 
 
 def generate_jpeg():

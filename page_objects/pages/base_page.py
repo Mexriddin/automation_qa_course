@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,7 +11,8 @@ class BasePage:
         self.wait = WebDriverWait(self.driver, timeout=10, poll_frequency=1)
 
     def open(self):
-        self.driver.get(self.url)
+        with allure.step(f"Open url: {self.url}"):
+            self.driver.get(self.url)
 
     def element_is_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
@@ -55,6 +57,7 @@ class BasePage:
 
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        return element
 
     def remove_ad(self):
         self.driver.execute_script('document.getElementById("Ad.Plus-728x90").style.display="none"')

@@ -9,6 +9,7 @@ venv
 *.so
 artifacts/download_files/*
 artifacts/upload_files/*
+allure-results
 
 # Distribution / packaging
 .Python

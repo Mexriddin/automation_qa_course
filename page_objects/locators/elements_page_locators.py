@@ -63,6 +63,7 @@ class ButtonsPageLocators:
 class LinksPageLocators:
     SIMPLE_LINK = ("css selector", "a#simpleLink")
     BAD_REQUEST = ("css selector", "a#bad-request")
+    STATUS_CODE = ("css selector", "#linkResponse b")
 
 
 class UploadAndDownloadPageLocators:
