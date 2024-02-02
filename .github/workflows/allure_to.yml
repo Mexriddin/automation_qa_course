@@ -40,7 +40,7 @@ jobs:
         uses: allure-framework/setup-allurectl@v1
         with:
           allure-endpoint: ${{env.ALLURE_ENDPOINT}}
-          allure-token: ${{env.ALLURE_TOKEN}}
+          allure-token: ${{secrets.ALLURE_TOKEN}}
           allure-project-id: ${{env.ALLURE_PROJECT_ID}}
       - name: run all tests
         # run: echo $ALLURE_PROJECT_ID
