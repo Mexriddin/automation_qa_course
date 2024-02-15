@@ -217,8 +217,6 @@ class LinksPage(BasePage):
             simple_link.click()
             self.driver.switch_to.window(self.driver.window_handles[1])
             assert requests.get(link_href).status_code == 200
-            print(self.driver.current_url)
-            print(link_href)
             assert self.driver.current_url == link_href, "The link is broken or url is incorrect"
 
     def check_broken_link(self):
